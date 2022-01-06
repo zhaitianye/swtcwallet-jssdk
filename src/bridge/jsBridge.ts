@@ -23,7 +23,6 @@ function setupWebViewJavascriptBridge(callback) {
         false
       );
     }
-    console.log("Android environment");
     sessionStorage.phoneType = "android";
   }
 
@@ -43,7 +42,6 @@ function setupWebViewJavascriptBridge(callback) {
     setTimeout(() => {
       document.documentElement.removeChild(WVJBIframe);
     }, 0);
-    console.log("iOS environment");
     sessionStorage.phoneType = "ios";
   }
 }

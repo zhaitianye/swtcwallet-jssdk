@@ -1,6 +1,6 @@
 {
   "name": "swtcwallet-jssdk",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "swtcwallet-jssdk",
   "main": "dist/index.js",
   "jsnext:main": "dist/index.esm.js",
@@ -9,7 +9,7 @@
   "scripts": {
     "clean": "rimraf ./dist",
     "test": "echo Error: missing tests",
-    "release": "npm test && npm run build && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags",
+    "release": "npm run build && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags",
     "lint": "eslint -c .eslintrc.js 'src/**/*.ts'",
     "lint:fix": "eslint -c .eslintrc.js 'src/**/*.ts' --fix",
     "build:self": "rollup -c config/rollup.config.js",
