@@ -1,5 +1,5 @@
 /*!
- * swtcwallet-jssdk 0.0.1 (https://github.com/zhaitianye/swtcwallet-jssdk)
+ * swtcwallet-jssdk 0.0.2 (https://github.com/zhaitianye/swtcwallet-jssdk)
  * API https://github.com/zhaitianye/swtcwallet-jssdk/blob/master/doc/api.md
  * Copyright 2017-2022 zhaitianye. All Rights Reserved
  * Licensed under MIT (https://github.com/zhaitianye/swtcwallet-jssdk/blob/master/LICENSE)
