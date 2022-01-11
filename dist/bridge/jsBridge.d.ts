@@ -1,5 +1,8 @@
-declare const _default: {
-    callHandler(name: any, data: any, callback: any): void;
-    registerHandler(name: any, callback: any): void;
-};
-export default _default;
+export declare const isAndroid: boolean;
+export declare const isIos: boolean;
+export declare const init: (time?: number) => Promise<{
+    success: boolean;
+    msg: string;
+    code: number;
+}>;
+export declare const connection: (name: string, data: any, callback: any) => void;

@@ -1,16 +1,7 @@
 // 引入js连接桥
-import jsBridge from "./bridge/jsBridge";
-
-// ----App主动调用js----
-export function getAPPDate() {
-  jsBridge.registerHandler("dataToJs", (data, responseCallback) => {
-    alert("app主动调用js方法，传入数据:" + data);
-    responseCallback(data);
-  });
-}
+import { init, connection } from "./bridge/jsBridge";
 
 // ----js主动调用App----
-
 declare const window: Window & {
   WebViewJavascriptBridge: any;
   WVJBCallbacks: any;
@@ -19,26 +10,23 @@ declare const window: Window & {
 
 // 判断是否钱包环境
 export async function isConnected() {
-  return !!(
-    window.WebViewJavascriptBridge ||
-    (window.webkit && window.webkit.messageHandlers)
-  );
+  return await init();
 }
 
 // 获取App信息
 export async function getAppInfo() {
   return await new Promise((resolve) => {
-    jsBridge.callHandler("getAppInfo", "", (res) => {
-      resolve(res);
+    connection("getAppInfo", "", (res) => {
+      resolve(JSON.parse(res));
     });
   });
 }
 
 // 调用App toast
-export async function handleAndroidToast(msg) {
+export async function handleAndroidToast(msg: string) {
   return await new Promise((resolve) => {
-    jsBridge.callHandler("toast", msg, (res) => {
-      resolve(res);
+    connection("toast", msg, (res) => {
+      resolve(JSON.parse(res));
     });
   });
 }
@@ -46,8 +34,8 @@ export async function handleAndroidToast(msg) {
 // 调起扫一扫
 export async function invokeQRScanner() {
   return await new Promise((resolve) => {
-    jsBridge.callHandler("invokeQRScanner", "", (res) => {
-      resolve(res);
+    connection("invokeQRScanner", "", (res) => {
+      resolve(JSON.parse(res));
     });
   });
 }
@@ -55,8 +43,8 @@ export async function invokeQRScanner() {
 // 回退
 export async function back() {
   return await new Promise((resolve) => {
-    jsBridge.callHandler("back", "", (res) => {
-      resolve(res);
+    connection("back", "", (res) => {
+      resolve(JSON.parse(res));
     });
   });
 }
@@ -64,8 +52,8 @@ export async function back() {
 // 刷新
 export async function refresh() {
   return await new Promise((resolve) => {
-    jsBridge.callHandler("refresh", "", (res) => {
-      resolve(res);
+    connection("refresh", "", (res) => {
+      resolve(JSON.parse(res));
     });
   });
 }
@@ -73,8 +61,8 @@ export async function refresh() {
 // 关闭
 export async function close() {
   return await new Promise((resolve) => {
-    jsBridge.callHandler("close", "", (res) => {
-      resolve(res);
+    connection("close", "", (res) => {
+      resolve(JSON.parse(res));
     });
   });
 }
@@ -82,8 +70,8 @@ export async function close() {
 // 获取钱包列表
 export async function getWalletList() {
   return await new Promise((resolve) => {
-    jsBridge.callHandler("getWalletList", "", (res) => {
-      resolve(res);
+    connection("getWalletList", "", (res) => {
+      resolve(JSON.parse(res));
     });
   });
 }
@@ -91,8 +79,8 @@ export async function getWalletList() {
 // 创建钱包、导入钱包
 export async function createWallet() {
   return await new Promise((resolve) => {
-    jsBridge.callHandler("createWallet", "", (res) => {
-      resolve(res);
+    connection("createWallet", "", (res) => {
+      resolve(JSON.parse(res));
     });
   });
 }
@@ -100,8 +88,8 @@ export async function createWallet() {
 // 获取当前钱包地址
 export async function getCurrentWallet() {
   return await new Promise((resolve) => {
-    jsBridge.callHandler("getCurrentWallet", "", (res) => {
-      resolve(res);
+    connection("getCurrentWallet", "", (res) => {
+      resolve(JSON.parse(res));
     });
   });
 }
@@ -109,50 +97,74 @@ export async function getCurrentWallet() {
 // 切换钱包地址
 export async function switchWallet() {
   return await new Promise((resolve) => {
-    jsBridge.callHandler("switchWallet", "", (res) => {
-      resolve(res);
+    connection("switchWallet", "", (res) => {
+      resolve(JSON.parse(res));
     });
   });
 }
 
 // 请求账号余额（多币种）
-export async function getAccountBalances({ account }) {
+interface GetAccountBalancesParams {
+  account: string;
+}
+export async function getAccountBalances({
+  account,
+}: GetAccountBalancesParams) {
   return await new Promise((resolve) => {
-    jsBridge.callHandler(
+    connection(
       "getAccountBalances",
       {
         account,
       },
       (res) => {
-        resolve(res);
+        resolve(JSON.parse(res));
       }
     );
   });
 }
 
 // 请求地址指定币种余额
-export async function getCurrencyBalances({ account, currency, issuer }) {
+interface GetCurrencyBalancesParams {
+  account: string;
+  currency: string;
+  issuer: string;
+}
+export async function getCurrencyBalances({
+  account,
+  currency,
+  issuer,
+}: GetCurrencyBalancesParams) {
   return await new Promise((resolve) => {
-    jsBridge.callHandler(
-      "getCurrencyBalances",
-      { account, currency, issuer },
-      (res) => {
-        resolve(res);
-      }
-    );
+    connection("getCurrencyBalances", { account, currency, issuer }, (res) => {
+      resolve(JSON.parse(res));
+    });
   });
 }
 
 // 请求账号信息
-export async function getAccountInfo({ account }) {
+interface GetAccountInfoParams {
+  account: string;
+}
+export async function getAccountInfo({ account }: GetAccountInfoParams) {
   return await new Promise((resolve) => {
-    jsBridge.callHandler("getAccountInfo", { account }, (res) => {
-      resolve(res);
+    connection("getAccountInfo", { account }, (res) => {
+      resolve(JSON.parse(res));
     });
   });
 }
 
 // 签名
+
+interface SignParams {
+  from: string;
+  to: string;
+  value: string;
+  currency: string;
+  issuer?: string;
+  secret: string;
+  addMemo?: string;
+  sequence?: string;
+}
 export async function sign({
   from,
   to,
@@ -162,13 +174,13 @@ export async function sign({
   secret,
   addMemo,
   sequence,
-}) {
+}: SignParams) {
   return await new Promise((resolve) => {
-    jsBridge.callHandler(
+    connection(
       "sign",
       { from, to, value, currency, issuer, secret, addMemo, sequence },
       (res) => {
-        resolve(res);
+        resolve(JSON.parse(res));
       }
     );
   });
@@ -187,7 +199,7 @@ export async function sendTransaction({
   action,
 }) {
   return await new Promise((resolve) => {
-    jsBridge.callHandler(
+    connection(
       "sendTransaction",
       {
         from,
@@ -201,7 +213,7 @@ export async function sendTransaction({
         action,
       },
       (res) => {
-        resolve(res);
+        resolve(JSON.parse(res));
       }
     );
   });
@@ -210,8 +222,8 @@ export async function sendTransaction({
 // 切换节点
 export async function selectNode() {
   return await new Promise((resolve) => {
-    jsBridge.callHandler("selectNode", "", (res) => {
-      resolve(res);
+    connection("selectNode", "", (res) => {
+      resolve(JSON.parse(res));
     });
   });
 }

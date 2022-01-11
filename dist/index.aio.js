@@ -1,5 +1,5 @@
 /*!
- * swtcwallet-jssdk 0.0.2 (https://github.com/zhaitianye/swtcwallet-jssdk)
+ * swtcwallet-jssdk 0.0.3 (https://github.com/zhaitianye/swtcwallet-jssdk)
  * API https://github.com/zhaitianye/swtcwallet-jssdk/blob/master/doc/api.md
  * Copyright 2017-2022 zhaitianye. All Rights Reserved
  * Licensed under MIT (https://github.com/zhaitianye/swtcwallet-jssdk/blob/master/LICENSE)
@@ -65,73 +65,76 @@
 
     var isAndroid = navigator.userAgent.indexOf("Android") > -1 ||
         navigator.userAgent.indexOf("Adr") > -1;
-    var isiOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-    function setupWebViewJavascriptBridge(callback) {
-        if (isAndroid) {
-            if (window.WebViewJavascriptBridge) {
-                callback(window.WebViewJavascriptBridge);
-            }
-            else {
-                document.addEventListener("WebViewJavascriptBridgeReady", function () {
-                    callback(window.WebViewJavascriptBridge);
-                }, false);
-            }
-            sessionStorage.phoneType = "android";
-        }
-        if (isiOS) {
-            if (window.WebViewJavascriptBridge) {
-                return callback(window.WebViewJavascriptBridge);
-            }
-            if (window.WVJBCallbacks) {
-                return window.WVJBCallbacks.push(callback);
-            }
-            window.WVJBCallbacks = [callback];
-            var WVJBIframe = document.createElement("iframe");
-            WVJBIframe.style.display = "none";
-            WVJBIframe.src = "wvjbscheme://__BRIDGE_LOADED__";
-            document.documentElement.appendChild(WVJBIframe);
-            setTimeout(function () {
-                document.documentElement.removeChild(WVJBIframe);
-            }, 0);
-            sessionStorage.phoneType = "ios";
-        }
-    }
-    setupWebViewJavascriptBridge(function (bridge) {
-        if (isAndroid) {
-            bridge.init(function (message, responseCallback) {
-                var data = {
-                    "Javascript Responds": "init success !",
-                };
-                responseCallback(data);
+    var isIos = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+    var init = function (time) {
+        if (time === void 0) { time = 1000; }
+        return __awaiter(this, void 0, void 0, function () {
+            var getWebViewJavascriptBridge, timeOutPromise, result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (isIos) {
+                            return [2, { success: false, msg: "IOS系统暂不支持", code: -1 }];
+                        }
+                        if (!isIos && !isAndroid) {
+                            return [2, { success: false, msg: "其他平台暂不支持", code: -1 }];
+                        }
+                        getWebViewJavascriptBridge = new Promise(function (resolve) {
+                            if (window.WebViewJavascriptBridge) {
+                                resolve(true);
+                            }
+                            document.addEventListener("WebViewJavascriptBridgeReady", function () {
+                                resolve(true);
+                            }, false);
+                        });
+                        timeOutPromise = new Promise(function (resolve) {
+                            setTimeout(function () {
+                                resolve(false);
+                            }, time);
+                        });
+                        return [4, new Promise(function (resolve) {
+                                Promise.race([getWebViewJavascriptBridge, timeOutPromise]).then(function (value) {
+                                    if (value === true) {
+                                        resolve(true);
+                                    }
+                                    else {
+                                        document.removeEventListener("WebViewJavascriptBridgeReady", function () {
+                                            alert("removeEventListener");
+                                        }, false);
+                                        resolve(false);
+                                    }
+                                });
+                            })];
+                    case 1:
+                        result = _a.sent();
+                        if (result === true) {
+                            return [2, { success: true, msg: "成功", code: 0 }];
+                        }
+                        else {
+                            return [2, { success: false, msg: "未连接到SWTC钱包", code: -1 }];
+                        }
+                        return [2];
+                }
             });
-        }
-    });
-    var jsBridge = {
-        callHandler: function (name, data, callback) {
-            setupWebViewJavascriptBridge(function (bridge) {
-                bridge.callHandler(name, data, callback);
-            });
-        },
-        registerHandler: function (name, callback) {
-            setupWebViewJavascriptBridge(function (bridge) {
-                bridge.registerHandler(name, function (data, responseCallback) {
-                    callback(data, responseCallback);
-                });
-            });
-        },
+        });
+    };
+    var connection = function (name, data, callback) {
+        init().then(function (res) {
+            if (!res.success) {
+                callback(JSON.stringify(res));
+                return;
+            }
+            window.WebViewJavascriptBridge.callHandler(name, data, callback);
+        });
     };
 
-    function getAPPDate() {
-        jsBridge.registerHandler("dataToJs", function (data, responseCallback) {
-            alert("app主动调用js方法，传入数据:" + data);
-            responseCallback(data);
-        });
-    }
     function isConnected() {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2, !!(window.WebViewJavascriptBridge ||
-                        (window.webkit && window.webkit.messageHandlers))];
+                switch (_a.label) {
+                    case 0: return [4, init()];
+                    case 1: return [2, _a.sent()];
+                }
             });
         });
     }
@@ -140,8 +143,8 @@
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, new Promise(function (resolve) {
-                            jsBridge.callHandler("getAppInfo", "", function (res) {
-                                resolve(res);
+                            connection("getAppInfo", "", function (res) {
+                                resolve(JSON.parse(res));
                             });
                         })];
                     case 1: return [2, _a.sent()];
@@ -154,8 +157,8 @@
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, new Promise(function (resolve) {
-                            jsBridge.callHandler("toast", msg, function (res) {
-                                resolve(res);
+                            connection("toast", msg, function (res) {
+                                resolve(JSON.parse(res));
                             });
                         })];
                     case 1: return [2, _a.sent()];
@@ -168,8 +171,8 @@
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, new Promise(function (resolve) {
-                            jsBridge.callHandler("invokeQRScanner", "", function (res) {
-                                resolve(res);
+                            connection("invokeQRScanner", "", function (res) {
+                                resolve(JSON.parse(res));
                             });
                         })];
                     case 1: return [2, _a.sent()];
@@ -182,8 +185,8 @@
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, new Promise(function (resolve) {
-                            jsBridge.callHandler("back", "", function (res) {
-                                resolve(res);
+                            connection("back", "", function (res) {
+                                resolve(JSON.parse(res));
                             });
                         })];
                     case 1: return [2, _a.sent()];
@@ -196,8 +199,8 @@
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, new Promise(function (resolve) {
-                            jsBridge.callHandler("refresh", "", function (res) {
-                                resolve(res);
+                            connection("refresh", "", function (res) {
+                                resolve(JSON.parse(res));
                             });
                         })];
                     case 1: return [2, _a.sent()];
@@ -210,8 +213,8 @@
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, new Promise(function (resolve) {
-                            jsBridge.callHandler("close", "", function (res) {
-                                resolve(res);
+                            connection("close", "", function (res) {
+                                resolve(JSON.parse(res));
                             });
                         })];
                     case 1: return [2, _a.sent()];
@@ -224,8 +227,8 @@
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, new Promise(function (resolve) {
-                            jsBridge.callHandler("getWalletList", "", function (res) {
-                                resolve(res);
+                            connection("getWalletList", "", function (res) {
+                                resolve(JSON.parse(res));
                             });
                         })];
                     case 1: return [2, _a.sent()];
@@ -238,8 +241,8 @@
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, new Promise(function (resolve) {
-                            jsBridge.callHandler("createWallet", "", function (res) {
-                                resolve(res);
+                            connection("createWallet", "", function (res) {
+                                resolve(JSON.parse(res));
                             });
                         })];
                     case 1: return [2, _a.sent()];
@@ -252,8 +255,8 @@
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, new Promise(function (resolve) {
-                            jsBridge.callHandler("getCurrentWallet", "", function (res) {
-                                resolve(res);
+                            connection("getCurrentWallet", "", function (res) {
+                                resolve(JSON.parse(res));
                             });
                         })];
                     case 1: return [2, _a.sent()];
@@ -266,8 +269,8 @@
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, new Promise(function (resolve) {
-                            jsBridge.callHandler("switchWallet", "", function (res) {
-                                resolve(res);
+                            connection("switchWallet", "", function (res) {
+                                resolve(JSON.parse(res));
                             });
                         })];
                     case 1: return [2, _a.sent()];
@@ -281,10 +284,10 @@
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0: return [4, new Promise(function (resolve) {
-                            jsBridge.callHandler("getAccountBalances", {
+                            connection("getAccountBalances", {
                                 account: account,
                             }, function (res) {
-                                resolve(res);
+                                resolve(JSON.parse(res));
                             });
                         })];
                     case 1: return [2, _b.sent()];
@@ -298,8 +301,8 @@
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0: return [4, new Promise(function (resolve) {
-                            jsBridge.callHandler("getCurrencyBalances", { account: account, currency: currency, issuer: issuer }, function (res) {
-                                resolve(res);
+                            connection("getCurrencyBalances", { account: account, currency: currency, issuer: issuer }, function (res) {
+                                resolve(JSON.parse(res));
                             });
                         })];
                     case 1: return [2, _b.sent()];
@@ -313,8 +316,8 @@
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0: return [4, new Promise(function (resolve) {
-                            jsBridge.callHandler("getAccountInfo", { account: account }, function (res) {
-                                resolve(res);
+                            connection("getAccountInfo", { account: account }, function (res) {
+                                resolve(JSON.parse(res));
                             });
                         })];
                     case 1: return [2, _b.sent()];
@@ -328,8 +331,8 @@
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0: return [4, new Promise(function (resolve) {
-                            jsBridge.callHandler("sign", { from: from, to: to, value: value, currency: currency, issuer: issuer, secret: secret, addMemo: addMemo, sequence: sequence }, function (res) {
-                                resolve(res);
+                            connection("sign", { from: from, to: to, value: value, currency: currency, issuer: issuer, secret: secret, addMemo: addMemo, sequence: sequence }, function (res) {
+                                resolve(JSON.parse(res));
                             });
                         })];
                     case 1: return [2, _b.sent()];
@@ -343,7 +346,7 @@
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0: return [4, new Promise(function (resolve) {
-                            jsBridge.callHandler("sendTransaction", {
+                            connection("sendTransaction", {
                                 from: from,
                                 to: to,
                                 data: data,
@@ -354,7 +357,7 @@
                                 memo: memo,
                                 action: action,
                             }, function (res) {
-                                resolve(res);
+                                resolve(JSON.parse(res));
                             });
                         })];
                     case 1: return [2, _b.sent()];
@@ -367,8 +370,8 @@
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, new Promise(function (resolve) {
-                            jsBridge.callHandler("selectNode", "", function (res) {
-                                resolve(res);
+                            connection("selectNode", "", function (res) {
+                                resolve(JSON.parse(res));
                             });
                         })];
                     case 1: return [2, _a.sent()];
@@ -377,7 +380,6 @@
         });
     }
 
-    exports.getAPPDate = getAPPDate;
     exports.isConnected = isConnected;
     exports.getAppInfo = getAppInfo;
     exports.handleAndroidToast = handleAndroidToast;

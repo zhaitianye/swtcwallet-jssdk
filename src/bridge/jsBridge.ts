@@ -1,80 +1,81 @@
-const isAndroid =
+export const isAndroid =
   navigator.userAgent.indexOf("Android") > -1 ||
   navigator.userAgent.indexOf("Adr") > -1;
-const isiOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+export const isIos = !!navigator.userAgent.match(
+  /\(i[^;]+;( U;)? CPU.+Mac OS X/
+);
 
 declare const window: Window & {
   WebViewJavascriptBridge: any;
   WVJBCallbacks: any;
 };
 
-// 这是必须要写的，用来创建一些设置
-function setupWebViewJavascriptBridge(callback) {
-  // Android使用
-  if (isAndroid) {
+// 初始化函数
+export const init = async function (time: number = 1000) {
+  if (isIos) {
+    return { success: false, msg: "IOS系统暂不支持", code: -1 };
+  }
+  if (!isIos && !isAndroid) {
+    return { success: false, msg: "其他平台暂不支持", code: -1 };
+  }
+  // 获取连接桥函数
+  var getWebViewJavascriptBridge = new Promise(function (resolve) {
     if (window.WebViewJavascriptBridge) {
-      callback(window.WebViewJavascriptBridge);
-    } else {
-      document.addEventListener(
-        "WebViewJavascriptBridgeReady",
-        () => {
-          callback(window.WebViewJavascriptBridge);
-        },
-        false
-      );
+      resolve(true);
     }
-    sessionStorage.phoneType = "android";
-  }
+    document.addEventListener(
+      "WebViewJavascriptBridgeReady",
+      () => {
+        resolve(true);
+      },
+      false
+    );
+  });
 
-  // iOS使用
-  if (isiOS) {
-    if (window.WebViewJavascriptBridge) {
-      return callback(window.WebViewJavascriptBridge);
+  // 超时取消函数
+  var timeOutPromise = new Promise(function (resolve) {
+    setTimeout(function () {
+      resolve(false);
+    }, time);
+  });
+
+  // 初始化结果
+  const result = await new Promise(function (resolve) {
+    Promise.race([getWebViewJavascriptBridge, timeOutPromise]).then(function (
+      value
+    ) {
+      if (value === true) {
+        resolve(true);
+      } else {
+        document.removeEventListener(
+          "WebViewJavascriptBridgeReady",
+          () => {
+            alert("removeEventListener");
+          },
+          false
+        );
+        resolve(false);
+      }
+    });
+  });
+  if (result === true) {
+    return { success: true, msg: "成功", code: 0 };
+  } else {
+    return { success: false, msg: "未连接到SWTC钱包", code: -1 };
+  }
+};
+
+// 连接桥
+export const connection = function (
+  name: string,
+  data: string | any,
+  callback
+) {
+  init().then((res) => {
+    if (!res.success) {
+      callback(JSON.stringify(res));
+      return;
     }
-    if (window.WVJBCallbacks) {
-      return window.WVJBCallbacks.push(callback);
-    }
-    window.WVJBCallbacks = [callback];
-    var WVJBIframe = document.createElement("iframe");
-    WVJBIframe.style.display = "none";
-    WVJBIframe.src = "wvjbscheme://__BRIDGE_LOADED__";
-    document.documentElement.appendChild(WVJBIframe);
-    setTimeout(() => {
-      document.documentElement.removeChild(WVJBIframe);
-    }, 0);
-    sessionStorage.phoneType = "ios";
-  }
-}
-
-// 注册回调函数，第一次连接时调用 初始化函数(Android需要初始化，iOS不用)
-setupWebViewJavascriptBridge((bridge) => {
-  if (isAndroid) {
-    // 初始化
-    bridge.init((message, responseCallback) => {
-      var data = {
-        "Javascript Responds": "init success !",
-      };
-      responseCallback(data);
-    });
-  }
-});
-
-export default {
-  // js调APP方法
-  // (参数分别为:app提供的方法名  传给app的数据  回调)
-  callHandler(name, data, callback) {
-    setupWebViewJavascriptBridge((bridge) => {
-      bridge.callHandler(name, data, callback);
-    });
-  },
-
-  // APP调js方法
-  // (参数分别为:js提供的方法名  回调)
-  registerHandler(name, callback) {
-    setupWebViewJavascriptBridge((bridge) => {
-      bridge.registerHandler(name, (data, responseCallback) => {
-        callback(data, responseCallback);
-      });
-    });
-  },
+    window.WebViewJavascriptBridge.callHandler(name, data, callback);
+  });
 };
