@@ -13,20 +13,6 @@ export declare function getWalletList(): Promise<{}>;
 export declare function createWallet(): Promise<{}>;
 export declare function getCurrentWallet(): Promise<{}>;
 export declare function switchWallet(): Promise<{}>;
-interface GetAccountBalancesParams {
-    account: string;
-}
-export declare function getAccountBalances({ account, }: GetAccountBalancesParams): Promise<{}>;
-interface GetCurrencyBalancesParams {
-    account: string;
-    currency: string;
-    issuer: string;
-}
-export declare function getCurrencyBalances({ account, currency, issuer, }: GetCurrencyBalancesParams): Promise<{}>;
-interface GetAccountInfoParams {
-    account: string;
-}
-export declare function getAccountInfo({ account }: GetAccountInfoParams): Promise<{}>;
 interface SignParams {
     from: string;
     to: string;

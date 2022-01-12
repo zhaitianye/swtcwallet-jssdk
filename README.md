@@ -25,6 +25,12 @@
 $ npm install --save swtcwallet-jssdk
 ```
 
+通过yarn下载安装代码
+
+```bash
+$ yarn add swtcwallet-jssdk
+```
+
 如果你是node环境
 
 ```js

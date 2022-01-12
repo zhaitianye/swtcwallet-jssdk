@@ -1,5 +1,5 @@
 /*!
- * swtcwallet-jssdk 0.0.3 (https://github.com/zhaitianye/swtcwallet-jssdk)
+ * swtcwallet-jssdk 0.0.4 (https://github.com/zhaitianye/swtcwallet-jssdk)
  * API https://github.com/zhaitianye/swtcwallet-jssdk/blob/master/doc/api.md
  * Copyright 2017-2022 zhaitianye. All Rights Reserved
  * Licensed under MIT (https://github.com/zhaitianye/swtcwallet-jssdk/blob/master/LICENSE)
@@ -272,53 +272,6 @@ function switchWallet() {
         });
     });
 }
-function getAccountBalances(_a) {
-    var account = _a.account;
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0: return [4, new Promise(function (resolve) {
-                        connection("getAccountBalances", {
-                            account: account,
-                        }, function (res) {
-                            resolve(JSON.parse(res));
-                        });
-                    })];
-                case 1: return [2, _b.sent()];
-            }
-        });
-    });
-}
-function getCurrencyBalances(_a) {
-    var account = _a.account, currency = _a.currency, issuer = _a.issuer;
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0: return [4, new Promise(function (resolve) {
-                        connection("getCurrencyBalances", { account: account, currency: currency, issuer: issuer }, function (res) {
-                            resolve(JSON.parse(res));
-                        });
-                    })];
-                case 1: return [2, _b.sent()];
-            }
-        });
-    });
-}
-function getAccountInfo(_a) {
-    var account = _a.account;
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0: return [4, new Promise(function (resolve) {
-                        connection("getAccountInfo", { account: account }, function (res) {
-                            resolve(JSON.parse(res));
-                        });
-                    })];
-                case 1: return [2, _b.sent()];
-            }
-        });
-    });
-}
 function sign(_a) {
     var from = _a.from, to = _a.to, value = _a.value, currency = _a.currency, issuer = _a.issuer, secret = _a.secret, addMemo = _a.addMemo, sequence = _a.sequence;
     return __awaiter(this, void 0, void 0, function () {
@@ -374,4 +327,4 @@ function selectNode() {
     });
 }
 
-export { isConnected, getAppInfo, handleAndroidToast, invokeQRScanner, back, refresh, close, getWalletList, createWallet, getCurrentWallet, switchWallet, getAccountBalances, getCurrencyBalances, getAccountInfo, sign, sendTransaction, selectNode };
+export { isConnected, getAppInfo, handleAndroidToast, invokeQRScanner, back, refresh, close, getWalletList, createWallet, getCurrentWallet, switchWallet, sign, sendTransaction, selectNode };

@@ -103,58 +103,7 @@ export async function switchWallet() {
   });
 }
 
-// 请求账号余额（多币种）
-interface GetAccountBalancesParams {
-  account: string;
-}
-export async function getAccountBalances({
-  account,
-}: GetAccountBalancesParams) {
-  return await new Promise((resolve) => {
-    connection(
-      "getAccountBalances",
-      {
-        account,
-      },
-      (res) => {
-        resolve(JSON.parse(res));
-      }
-    );
-  });
-}
-
-// 请求地址指定币种余额
-interface GetCurrencyBalancesParams {
-  account: string;
-  currency: string;
-  issuer: string;
-}
-export async function getCurrencyBalances({
-  account,
-  currency,
-  issuer,
-}: GetCurrencyBalancesParams) {
-  return await new Promise((resolve) => {
-    connection("getCurrencyBalances", { account, currency, issuer }, (res) => {
-      resolve(JSON.parse(res));
-    });
-  });
-}
-
-// 请求账号信息
-interface GetAccountInfoParams {
-  account: string;
-}
-export async function getAccountInfo({ account }: GetAccountInfoParams) {
-  return await new Promise((resolve) => {
-    connection("getAccountInfo", { account }, (res) => {
-      resolve(JSON.parse(res));
-    });
-  });
-}
-
 // 签名
-
 interface SignParams {
   from: string;
   to: string;
