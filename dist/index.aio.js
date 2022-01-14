@@ -1,5 +1,5 @@
 /*!
- * swtcwallet-jssdk 0.0.4 (https://github.com/zhaitianye/swtcwallet-jssdk)
+ * swtcwallet-jssdk 0.0.5 (https://github.com/zhaitianye/swtcwallet-jssdk)
  * API https://github.com/zhaitianye/swtcwallet-jssdk/blob/master/doc/api.md
  * Copyright 2017-2022 zhaitianye. All Rights Reserved
  * Licensed under MIT (https://github.com/zhaitianye/swtcwallet-jssdk/blob/master/LICENSE)
@@ -222,20 +222,6 @@
             });
         });
     }
-    function walletList() {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, new Promise(function (resolve) {
-                            connection("getWalletList", "", function (res) {
-                                resolve(JSON.parse(res));
-                            });
-                        })];
-                    case 1: return [2, _a.sent()];
-                }
-            });
-        });
-    }
     function walletCreate() {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -278,13 +264,27 @@
             });
         });
     }
+    function selectNode() {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, new Promise(function (resolve) {
+                            connection("selectNode", "", function (res) {
+                                resolve(JSON.parse(res));
+                            });
+                        })];
+                    case 1: return [2, _a.sent()];
+                }
+            });
+        });
+    }
     function txSign(_a) {
-        var to = _a.to, value = _a.value, currency = _a.currency, issuer = _a.issuer, memo = _a.memo, sequence = _a.sequence;
+        var to = _a.to, value = _a.value, currency = _a.currency, issuer = _a.issuer, memo = _a.memo;
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0: return [4, new Promise(function (resolve) {
-                            connection("sign", { to: to, value: value, currency: currency, issuer: issuer, memo: memo, sequence: sequence }, function (res) {
+                            connection("sign", { to: to, value: value, currency: currency, issuer: issuer, memo: memo }, function (res) {
                                 resolve(JSON.parse(res));
                             });
                         })];
@@ -310,20 +310,6 @@
             });
         });
     }
-    function selectNode() {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, new Promise(function (resolve) {
-                            connection("selectNode", "", function (res) {
-                                resolve(JSON.parse(res));
-                            });
-                        })];
-                    case 1: return [2, _a.sent()];
-                }
-            });
-        });
-    }
 
     exports.isConnected = isConnected;
     exports.appInfo = appInfo;
@@ -332,13 +318,12 @@
     exports.appBack = appBack;
     exports.appRefresh = appRefresh;
     exports.appClose = appClose;
-    exports.walletList = walletList;
     exports.walletCreate = walletCreate;
     exports.walletCurrent = walletCurrent;
     exports.walletSwitch = walletSwitch;
+    exports.selectNode = selectNode;
     exports.txSign = txSign;
     exports.txSend = txSend;
-    exports.selectNode = selectNode;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

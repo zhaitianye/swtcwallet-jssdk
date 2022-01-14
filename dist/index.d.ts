@@ -9,22 +9,20 @@ export declare function appQr(): Promise<{}>;
 export declare function appBack(): Promise<{}>;
 export declare function appRefresh(): Promise<{}>;
 export declare function appClose(): Promise<{}>;
-export declare function walletList(): Promise<{}>;
 export declare function walletCreate(): Promise<{}>;
 export declare function walletCurrent(): Promise<{}>;
 export declare function walletSwitch(): Promise<{}>;
+export declare function selectNode(): Promise<{}>;
 interface TxSignParams {
     to: string;
     value: string;
     currency: string;
-    issuer?: string;
+    issuer: string;
     memo?: string;
-    sequence?: string;
 }
-export declare function txSign({ to, value, currency, issuer, memo, sequence, }: TxSignParams): Promise<{}>;
+export declare function txSign({ to, value, currency, issuer, memo, }: TxSignParams): Promise<{}>;
 interface TxSendParams {
     blob: string;
 }
 export declare function txSend({ blob }: TxSendParams): Promise<{}>;
-export declare function selectNode(): Promise<{}>;
 export {};

@@ -1,5 +1,7 @@
 # [swtcwallet-jssdk](https://github.com/zhaitianye/swtcwallet-jssdk)
-[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/zhaitianye/swtcwallet-jssdk/blob/master/LICENSE)
+
+[![version](https://img.shields.io/npm/v/swtcwallet-jssdk.svg)](https://www.npmjs.com/package/swtcwallet-jssdk) [![downloads](https://img.shields.io/npm/dm/swtcwallet-jssdk.svg)](https://www.npmjs.com/package/swtcwallet-jssdk) [![LICENSE](https://img.shields.io/npm/l/swtcwallet-jssdk.svg)](https://github.com/zhaitianye/swtcwallet-jssdk/blob/master/LICENSE) ![repo-types](https://img.shields.io/npm/types/swtcwallet-jssdk.svg) ![repo-size](https://img.shields.io/github/repo-size/zhaitianye/swtcwallet-jssdk) ![minzip](https://img.shields.io/bundlephobia/minzip/swtcwallet-jssdk)
+
 
 `swtc wallet` JS-SDK
 
