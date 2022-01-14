@@ -13,8 +13,8 @@
     "build:aio": "rollup -c config/rollup.config.aio.js",
     "build:aio.min": "cross-env NODE_ENV=production npm run build:aio",
     "build": "npm run clean && npm run build:self && npm run build:esm && npm run build:aio && npm run build:aio.min",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
+    "docs:dev": "vuepress dev docs_src",
+    "docs:build": "vuepress build docs_src",
     "pre:release":"npm run docs:build && npm run build"
   },
   "author": "zhaitianye",

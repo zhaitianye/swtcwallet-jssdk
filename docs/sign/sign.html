@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>签名 | SWTCWALLET_JS_SDK</title>
+    <meta name="generator" content="VuePress 1.9.5">
+    <link rel="icon" href="logo.png">
+    <meta name="description" content="作为 SWTC 钱包的链接桥,对钱包内DAPP提供SDK服务">
+    
+    <link rel="preload" href="/assets/css/0.styles.495d9abf.css" as="style"><link rel="preload" href="/assets/js/app.3d132383.js" as="script"><link rel="preload" href="/assets/js/2.9ad6081e.js" as="script"><link rel="preload" href="/assets/js/11.82346134.js" as="script"><link rel="prefetch" href="/assets/js/10.07309d0f.js"><link rel="prefetch" href="/assets/js/12.16f0e6b2.js"><link rel="prefetch" href="/assets/js/13.d69bfe70.js"><link rel="prefetch" href="/assets/js/14.e5f4da75.js"><link rel="prefetch" href="/assets/js/15.a6f8fe84.js"><link rel="prefetch" href="/assets/js/3.2604e151.js"><link rel="prefetch" href="/assets/js/4.8ab602eb.js"><link rel="prefetch" href="/assets/js/5.2b694d8e.js"><link rel="prefetch" href="/assets/js/6.16bbfd57.js"><link rel="prefetch" href="/assets/js/7.59148d89.js"><link rel="prefetch" href="/assets/js/8.5d627518.js"><link rel="prefetch" href="/assets/js/9.47d09cc7.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.495d9abf.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">SWTCWALLET_JS_SDK</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><a href="/" aria-current="page" class="sidebar-link">首页</a></li><li><a href="/started/getting-started.html" class="sidebar-link">指南</a></li><li><a href="/connected/connected.html" class="sidebar-link">连接</a></li><li><a href="/app/app.html" class="sidebar-link">APP</a></li><li><a href="/wallet/wallet.html" class="sidebar-link">钱包</a></li><li><a href="/node/node.html" class="sidebar-link">节点</a></li><li><a href="/sign/sign.html" aria-current="page" class="active sidebar-link">签名</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/sign/sign.html#单笔支付签名" class="sidebar-link">单笔支付签名</a></li></ul></li><li><a href="/transaction/transaction.html" class="sidebar-link">事务</a></li><li><a href="/update/update.html" class="sidebar-link">更新说明</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="签名"><a href="#签名" class="header-anchor">#</a> 签名</h1> <h2 id="单笔支付签名"><a href="#单笔支付签名" class="header-anchor">#</a> 单笔支付签名</h2> <h3 id="类型"><a href="#类型" class="header-anchor">#</a> 类型</h3> <p><code>Async Funciton</code></p> <h3 id="描述"><a href="#描述" class="header-anchor">#</a> 描述</h3> <p>当前钱包进行单笔支付的签名</p> <h3 id="方法名称"><a href="#方法名称" class="header-anchor">#</a> 方法名称</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">txSign</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h3 id="参数说明"><a href="#参数说明" class="header-anchor">#</a> 参数说明</h3> <table><thead><tr><th>参数</th> <th>类型</th> <th>说明</th></tr></thead> <tbody><tr><td>to</td> <td>String</td> <td>接收方地址</td></tr> <tr><td>value</td> <td>String</td> <td>支付数量</td></tr> <tr><td>currency</td> <td>String</td> <td>货币种类，三到六个字母或 20 字节的自定义货币</td></tr> <tr><td>issuer</td> <td>String</td> <td>货币发行方，无则留 ''</td></tr> <tr><td>memo</td> <td>String?</td> <td>备注信息</td></tr></tbody></table> <h3 id="请求样例"><a href="#请求样例" class="header-anchor">#</a> 请求样例</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> txSign <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;swtcwallet-jssdk&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">async</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> params <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">to</span><span class="token operator">:</span> <span class="token string">&quot;jUGP9LXNySXgnjvCJYvcezAxaGqD6a6d5R&quot;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">value</span><span class="token operator">:</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">currency</span><span class="token operator">:</span> <span class="token string">&quot;SWT&quot;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">memo</span><span class="token operator">:</span> <span class="token string">&quot;测试一下&quot;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">txSign</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> txSign <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;swtcwallet-jssdk&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">async</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> params <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">to</span><span class="token operator">:</span> <span class="token string">&quot;jUGP9LXNySXgnjvCJYvcezAxaGqD6a6d5R&quot;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">value</span><span class="token operator">:</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">currency</span><span class="token operator">:</span> <span class="token string">&quot;TEST&quot;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">issuer</span><span class="token operator">:</span> <span class="token string">&quot;jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or&quot;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">txSign</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><h3 id="返回值示例"><a href="#返回值示例" class="header-anchor">#</a> 返回值示例</h3> <h4 id="成功"><a href="#成功" class="header-anchor">#</a> 成功</h4> <div class="language-JSON extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+    <span class="token property">&quot;success&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;msg&quot;</span><span class="token operator">:</span> <span class="token string">&quot;成功&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;code&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;data&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;blob&quot;</span><span class="token operator">:</span><span class="token string">&quot;xxxxxxxx&quot;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h4 id="失败"><a href="#失败" class="header-anchor">#</a> 失败</h4> <blockquote><p>注：此接口需要先登录</p></blockquote> <div class="language-JSON extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+    <span class="token property">&quot;success&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;msg&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Please login first&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;code&quot;</span><span class="token operator">:</span> <span class="token number">-1</span>
+<span class="token punctuation">}</span>
+</code></pre></div><div class="language-JSON extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+    <span class="token property">&quot;success&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;msg&quot;</span><span class="token operator">:</span> <span class="token string">&quot;密码错误&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;code&quot;</span><span class="token operator">:</span> <span class="token number">-1</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="返回值解析"><a href="#返回值解析" class="header-anchor">#</a> 返回值解析</h3> <table><thead><tr><th>参数</th> <th>类型</th> <th>说明</th></tr></thead> <tbody><tr><td>success</td> <td>Boolean</td> <td>此次请求是否成功</td></tr> <tr><td>msg</td> <td>String</td> <td>返回的信息</td></tr> <tr><td>code</td> <td>Integer</td> <td>状态码，0 成功，-1 失败</td></tr> <tr><td>data</td> <td>Object</td> <td>数据</td></tr> <tr><td>data.blob</td> <td>String</td> <td>此笔交易的签名信息，可以提交到节点</td></tr></tbody></table></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/node/node.html" class="prev">
+        节点
+      </a></span> <span class="next"><a href="/transaction/transaction.html">
+        事务
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.3d132383.js" defer></script><script src="/assets/js/2.9ad6081e.js" defer></script><script src="/assets/js/11.82346134.js" defer></script>
+  </body>
+</html>
