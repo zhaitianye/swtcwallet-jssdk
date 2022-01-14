@@ -7,8 +7,7 @@ module.exports = {
       { rel: "icon", href: "logo.png" },
     ],
   ],
-  dest: "docs",
-  base: "/",
+  base: "/swtcwallet-jssdk/",
   themeConfig: {
     nav: [],
     sidebar: [
