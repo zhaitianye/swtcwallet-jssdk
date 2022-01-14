@@ -8,6 +8,7 @@ module.exports = {
     ],
   ],
   base: "/swtcwallet-jssdk/",
+  dest: "docs",
   themeConfig: {
     nav: [],
     sidebar: [

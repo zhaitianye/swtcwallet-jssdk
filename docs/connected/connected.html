@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>连接 | SWTCWALLET_JS_SDK</title>
+    <meta name="generator" content="VuePress 1.9.5">
+    <link rel="icon" href="logo.png">
+    <meta name="description" content="作为 SWTC 钱包的链接桥,对钱包内DAPP提供SDK服务">
+    
+    <link rel="preload" href="/swtcwallet-jssdk/assets/css/0.styles.54112321.css" as="style"><link rel="preload" href="/swtcwallet-jssdk/assets/js/app.8284a1a1.js" as="script"><link rel="preload" href="/swtcwallet-jssdk/assets/js/2.9ad6081e.js" as="script"><link rel="preload" href="/swtcwallet-jssdk/assets/js/9.1e569f9a.js" as="script"><link rel="prefetch" href="/swtcwallet-jssdk/assets/js/10.0c3c552e.js"><link rel="prefetch" href="/swtcwallet-jssdk/assets/js/11.274818f0.js"><link rel="prefetch" href="/swtcwallet-jssdk/assets/js/12.d7ac2287.js"><link rel="prefetch" href="/swtcwallet-jssdk/assets/js/13.efee3559.js"><link rel="prefetch" href="/swtcwallet-jssdk/assets/js/14.5f474475.js"><link rel="prefetch" href="/swtcwallet-jssdk/assets/js/15.a6f8fe84.js"><link rel="prefetch" href="/swtcwallet-jssdk/assets/js/3.1841f84b.js"><link rel="prefetch" href="/swtcwallet-jssdk/assets/js/4.4840bc6c.js"><link rel="prefetch" href="/swtcwallet-jssdk/assets/js/5.2b694d8e.js"><link rel="prefetch" href="/swtcwallet-jssdk/assets/js/6.16bbfd57.js"><link rel="prefetch" href="/swtcwallet-jssdk/assets/js/7.59148d89.js"><link rel="prefetch" href="/swtcwallet-jssdk/assets/js/8.6cd4198b.js">
+    <link rel="stylesheet" href="/swtcwallet-jssdk/assets/css/0.styles.54112321.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/swtcwallet-jssdk/" class="home-link router-link-active"><!----> <span class="site-name">SWTCWALLET_JS_SDK</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><a href="/swtcwallet-jssdk/" aria-current="page" class="sidebar-link">首页</a></li><li><a href="/swtcwallet-jssdk/started/getting-started.html" class="sidebar-link">指南</a></li><li><a href="/swtcwallet-jssdk/connected/connected.html" aria-current="page" class="active sidebar-link">连接</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/swtcwallet-jssdk/connected/connected.html#是否连接到钱包" class="sidebar-link">是否连接到钱包</a></li></ul></li><li><a href="/swtcwallet-jssdk/app/app.html" class="sidebar-link">APP</a></li><li><a href="/swtcwallet-jssdk/wallet/wallet.html" class="sidebar-link">钱包</a></li><li><a href="/swtcwallet-jssdk/node/node.html" class="sidebar-link">节点</a></li><li><a href="/swtcwallet-jssdk/sign/sign.html" class="sidebar-link">签名</a></li><li><a href="/swtcwallet-jssdk/transaction/transaction.html" class="sidebar-link">事务</a></li><li><a href="/swtcwallet-jssdk/update/update.html" class="sidebar-link">更新说明</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="连接"><a href="#连接" class="header-anchor">#</a> 连接</h1> <h2 id="是否连接到钱包"><a href="#是否连接到钱包" class="header-anchor">#</a> 是否连接到钱包</h2> <h3 id="类型"><a href="#类型" class="header-anchor">#</a> 类型</h3> <p><code>Async Funciton</code></p> <h3 id="描述"><a href="#描述" class="header-anchor">#</a> 描述</h3> <p>判断当前环境是否为钱包环境，并确认是否连接到钱包。</p> <h3 id="方法名称"><a href="#方法名称" class="header-anchor">#</a> 方法名称</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">isConnected</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h3 id="参数说明"><a href="#参数说明" class="header-anchor">#</a> 参数说明</h3> <p>无</p> <h3 id="请求样例"><a href="#请求样例" class="header-anchor">#</a> 请求样例</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> isConnected <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;swtcwallet-jssdk&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">async</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">isConnected</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><h3 id="返回值示例"><a href="#返回值示例" class="header-anchor">#</a> 返回值示例</h3> <h4 id="成功"><a href="#成功" class="header-anchor">#</a> 成功</h4> <div class="language-JSON extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+    <span class="token property">&quot;success&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;msg&quot;</span><span class="token operator">:</span> <span class="token string">&quot;成功&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;code&quot;</span><span class="token operator">:</span> <span class="token number">0</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h4 id="失败"><a href="#失败" class="header-anchor">#</a> 失败</h4> <div class="language-JSON extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+    <span class="token property">&quot;success&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;msg&quot;</span><span class="token operator">:</span> <span class="token string">&quot;未连接到SWTC钱包&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;code&quot;</span><span class="token operator">:</span> <span class="token number">-1</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="返回值解析"><a href="#返回值解析" class="header-anchor">#</a> 返回值解析</h3> <table><thead><tr><th>参数</th> <th>类型</th> <th>说明</th></tr></thead> <tbody><tr><td>success</td> <td>Boolean</td> <td>此次请求是否成功</td></tr> <tr><td>msg</td> <td>String</td> <td>返回的信息</td></tr> <tr><td>code</td> <td>Integer</td> <td>状态码，0 成功，-1 失败</td></tr></tbody></table></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/swtcwallet-jssdk/started/getting-started.html" class="prev">
+        指南
+      </a></span> <span class="next"><a href="/swtcwallet-jssdk/app/app.html">
+        APP
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/swtcwallet-jssdk/assets/js/app.8284a1a1.js" defer></script><script src="/swtcwallet-jssdk/assets/js/2.9ad6081e.js" defer></script><script src="/swtcwallet-jssdk/assets/js/9.1e569f9a.js" defer></script>
+  </body>
+</html>
