@@ -12,7 +12,7 @@ module.exports = {
   themeConfig: {
     nav: [],
     sidebar: [
-      "/",
+      ["/", "首页"],
       ["/started/getting-started.md", "指南"],
       ["/connected/connected.md", "连接"],
       ["/app/app.md", "APP"],

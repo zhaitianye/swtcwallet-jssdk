@@ -132,7 +132,7 @@ function isConnected() {
         });
     });
 }
-function getAppInfo() {
+function appInfo() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -146,7 +146,7 @@ function getAppInfo() {
         });
     });
 }
-function handleAndroidToast(msg) {
+function appToast(msg) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -160,7 +160,7 @@ function handleAndroidToast(msg) {
         });
     });
 }
-function invokeQRScanner() {
+function appQr() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -174,7 +174,7 @@ function invokeQRScanner() {
         });
     });
 }
-function back() {
+function appBack() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -188,7 +188,7 @@ function back() {
         });
     });
 }
-function refresh() {
+function appRefresh() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -202,7 +202,7 @@ function refresh() {
         });
     });
 }
-function close() {
+function appClose() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -216,7 +216,7 @@ function close() {
         });
     });
 }
-function getWalletList() {
+function walletList() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -230,7 +230,7 @@ function getWalletList() {
         });
     });
 }
-function createWallet() {
+function walletCreate() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -244,7 +244,7 @@ function createWallet() {
         });
     });
 }
-function getCurrentWallet() {
+function walletCurrent() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -258,7 +258,7 @@ function getCurrentWallet() {
         });
     });
 }
-function switchWallet() {
+function walletSwitch() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -272,13 +272,13 @@ function switchWallet() {
         });
     });
 }
-function sign(_a) {
-    var from = _a.from, to = _a.to, value = _a.value, currency = _a.currency, issuer = _a.issuer, secret = _a.secret, addMemo = _a.addMemo, sequence = _a.sequence;
+function txSign(_a) {
+    var to = _a.to, value = _a.value, currency = _a.currency, issuer = _a.issuer, memo = _a.memo, sequence = _a.sequence;
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0: return [4, new Promise(function (resolve) {
-                        connection("sign", { from: from, to: to, value: value, currency: currency, issuer: issuer, secret: secret, addMemo: addMemo, sequence: sequence }, function (res) {
+                        connection("sign", { to: to, value: value, currency: currency, issuer: issuer, memo: memo, sequence: sequence }, function (res) {
                             resolve(JSON.parse(res));
                         });
                     })];
@@ -287,22 +287,14 @@ function sign(_a) {
         });
     });
 }
-function sendTransaction(_a) {
-    var from = _a.from, to = _a.to, data = _a.data, gasPrice = _a.gasPrice, value = _a.value, currency = _a.currency, issuer = _a.issuer, memo = _a.memo, action = _a.action;
+function txSend(_a) {
+    var blob = _a.blob;
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0: return [4, new Promise(function (resolve) {
                         connection("sendTransaction", {
-                            from: from,
-                            to: to,
-                            data: data,
-                            gasPrice: gasPrice,
-                            value: value,
-                            currency: currency,
-                            issuer: issuer,
-                            memo: memo,
-                            action: action,
+                            blob: blob,
                         }, function (res) {
                             resolve(JSON.parse(res));
                         });
@@ -327,4 +319,4 @@ function selectNode() {
     });
 }
 
-export { isConnected, getAppInfo, handleAndroidToast, invokeQRScanner, back, refresh, close, getWalletList, createWallet, getCurrentWallet, switchWallet, sign, sendTransaction, selectNode };
+export { isConnected, appInfo, appToast, appQr, appBack, appRefresh, appClose, walletList, walletCreate, walletCurrent, walletSwitch, txSign, txSend, selectNode };

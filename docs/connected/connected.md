@@ -1,5 +1,4 @@
 # 连接
-
 ## 是否连接到钱包
 
 ### 类型
@@ -23,8 +22,8 @@ isConnected();
 ### 请求样例
 
 ```js
+import { isConnected } from "swtcwallet-jssdk";
 async function() {
-  import { isConnected } from "swtcwallet-jssdk";
   const result = await isConnected();
 };
 ```

@@ -3,37 +3,28 @@ export declare function isConnected(): Promise<{
     msg: string;
     code: number;
 }>;
-export declare function getAppInfo(): Promise<{}>;
-export declare function handleAndroidToast(msg: string): Promise<{}>;
-export declare function invokeQRScanner(): Promise<{}>;
-export declare function back(): Promise<{}>;
-export declare function refresh(): Promise<{}>;
-export declare function close(): Promise<{}>;
-export declare function getWalletList(): Promise<{}>;
-export declare function createWallet(): Promise<{}>;
-export declare function getCurrentWallet(): Promise<{}>;
-export declare function switchWallet(): Promise<{}>;
-interface SignParams {
-    from: string;
+export declare function appInfo(): Promise<{}>;
+export declare function appToast(msg: string): Promise<{}>;
+export declare function appQr(): Promise<{}>;
+export declare function appBack(): Promise<{}>;
+export declare function appRefresh(): Promise<{}>;
+export declare function appClose(): Promise<{}>;
+export declare function walletList(): Promise<{}>;
+export declare function walletCreate(): Promise<{}>;
+export declare function walletCurrent(): Promise<{}>;
+export declare function walletSwitch(): Promise<{}>;
+interface TxSignParams {
     to: string;
     value: string;
     currency: string;
     issuer?: string;
-    secret: string;
-    addMemo?: string;
+    memo?: string;
     sequence?: string;
 }
-export declare function sign({ from, to, value, currency, issuer, secret, addMemo, sequence, }: SignParams): Promise<{}>;
-export declare function sendTransaction({ from, to, data, gasPrice, value, currency, issuer, memo, action, }: {
-    from: any;
-    to: any;
-    data: any;
-    gasPrice: any;
-    value: any;
-    currency: any;
-    issuer: any;
-    memo: any;
-    action: any;
-}): Promise<{}>;
+export declare function txSign({ to, value, currency, issuer, memo, sequence, }: TxSignParams): Promise<{}>;
+interface TxSendParams {
+    blob: string;
+}
+export declare function txSend({ blob }: TxSendParams): Promise<{}>;
 export declare function selectNode(): Promise<{}>;
 export {};
