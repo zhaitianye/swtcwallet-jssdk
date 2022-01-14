@@ -94,8 +94,17 @@ export async function walletSwitch() {
   });
 }
 
+// 获取当前节点
+export async function nodeCurrent() {
+  return await new Promise((resolve) => {
+    connection("getCurrentNode", "", (res) => {
+      resolve(JSON.parse(res));
+    });
+  });
+}
+
 // 切换节点
-export async function selectNode() {
+export async function nodeSelect() {
   return await new Promise((resolve) => {
     connection("selectNode", "", (res) => {
       resolve(JSON.parse(res));

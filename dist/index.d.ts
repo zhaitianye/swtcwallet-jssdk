@@ -12,7 +12,8 @@ export declare function appClose(): Promise<{}>;
 export declare function walletCreate(): Promise<{}>;
 export declare function walletCurrent(): Promise<{}>;
 export declare function walletSwitch(): Promise<{}>;
-export declare function selectNode(): Promise<{}>;
+export declare function nodeCurrent(): Promise<{}>;
+export declare function nodeSelect(): Promise<{}>;
 interface TxSignParams {
     to: string;
     value: string;

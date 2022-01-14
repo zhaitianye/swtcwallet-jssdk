@@ -1,5 +1,5 @@
 /*!
- * swtcwallet-jssdk 0.0.5 (https://github.com/zhaitianye/swtcwallet-jssdk)
+ * swtcwallet-jssdk 0.0.6 (https://github.com/zhaitianye/swtcwallet-jssdk)
  * API https://github.com/zhaitianye/swtcwallet-jssdk/blob/master/doc/api.md
  * Copyright 2017-2022 zhaitianye. All Rights Reserved
  * Licensed under MIT (https://github.com/zhaitianye/swtcwallet-jssdk/blob/master/LICENSE)
@@ -264,7 +264,21 @@
             });
         });
     }
-    function selectNode() {
+    function nodeCurrent() {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, new Promise(function (resolve) {
+                            connection("getCurrentNode", "", function (res) {
+                                resolve(JSON.parse(res));
+                            });
+                        })];
+                    case 1: return [2, _a.sent()];
+                }
+            });
+        });
+    }
+    function nodeSelect() {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -321,7 +335,8 @@
     exports.walletCreate = walletCreate;
     exports.walletCurrent = walletCurrent;
     exports.walletSwitch = walletSwitch;
-    exports.selectNode = selectNode;
+    exports.nodeCurrent = nodeCurrent;
+    exports.nodeSelect = nodeSelect;
     exports.txSign = txSign;
     exports.txSend = txSend;
 

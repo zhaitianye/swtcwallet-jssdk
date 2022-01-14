@@ -60,4 +60,4 @@ requirejs(['node_modules/swtcwallet-jssdk/dist/index.aio.js'], function (wt) {
 ```
 
 ## API文档
-[API](./doc/api.md)
+[API](https://zhaitianye.github.io/swtcwallet-jssdk/) 

@@ -7,6 +7,8 @@ module.exports = {
       { rel: "icon", href: "/logo.png" },
     ],
   ],
+  // 注意，发布到其他nginx目录的时候，此base值需要改成 "/"
+  // base: "/",
   base: "/swtcwallet-jssdk/",
   dest: "docs",
   themeConfig: {

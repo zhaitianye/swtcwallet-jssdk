@@ -1,6 +1,6 @@
 {
   "name": "swtcwallet-jssdk",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "swtcwallet-jssdk",
   "main": "dist/index.js",
   "jsnext:main": "dist/index.esm.js",
